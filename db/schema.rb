@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 20180222100605) do
     t.string "achievement"
     t.boolean "achieved", default: false, null: false
     t.boolean "acheived", default: false, null: false
-    t.bigint "{:foreign_key=>true}_id"
-    t.index ["{:foreign_key=>true}_id"], name: "index_achievements_on_{:foreign_key=>true}_id"
   end
 
   create_table "classrooms", force: :cascade do |t|
@@ -45,11 +43,7 @@ ActiveRecord::Schema.define(version: 20180222100605) do
 
   create_table "skill_level_achievements", force: :cascade do |t|
     t.string "achievement"
-    t.bigint "skill_level_id"
-    t.boolean "achieved", default: false, null: false
-    t.bigint "student_id"
-    t.index ["skill_level_id"], name: "index_skill_level_achievements_on_skill_level_id"
-    t.index ["student_id"], name: "index_skill_level_achievements_on_student_id"
+    t.integer "skill_level"
   end
 
   create_table "skill_levels", force: :cascade do |t|
@@ -100,8 +94,6 @@ ActiveRecord::Schema.define(version: 20180222100605) do
     t.boolean "english_as_language"
     t.boolean "gender"
     t.string "avatar"
-    t.bigint "{:foreign_key=>true}_id"
-    t.index ["{:foreign_key=>true}_id"], name: "index_students_on_{:foreign_key=>true}_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -128,8 +120,6 @@ ActiveRecord::Schema.define(version: 20180222100605) do
     t.index ["reset_password_token"], name: "index_teachers_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "skill_level_achievements", "skill_levels"
-  add_foreign_key "skill_level_achievements", "students"
   add_foreign_key "student_achievements", "achievements"
   add_foreign_key "student_achievements", "students"
   add_foreign_key "student_notes", "students"
